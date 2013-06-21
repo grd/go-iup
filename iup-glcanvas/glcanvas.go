@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -17,27 +17,26 @@
 	License along with go-iup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package iup
+package glcanvas
 
 /*
-#cgo LDFLAGS: -liupcontrols -liupgl
-#cgo linux LDFLAGS: -liupgtk
-#cgo windows LDFLAGS: -liup -lgdi32 -lole32 -lcomdlg32 -lcomctl32
+#cgo LDFLAGS: -liup -liupcontrols -liupgl
+#cgo windows LDFLAGS: -lgdi32 -lole32 -lcomdlg32 -lcomctl32
 
 #include <stdlib.h>
 #include <iup.h>
 #include <iupgl.h>
 */
 import "C"
-import . "github.com/jcowgar/go-iup"
+import . "github.com/grd/go-iup/iup"
 
 func GLCanvas(opts ...interface{}) *Ihandle {
 	OpenControlLib()
-	
+
 	ih := (*Ihandle)(C.IupGLCanvas(nil))
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}

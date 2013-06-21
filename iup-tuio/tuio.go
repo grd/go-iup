@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -17,12 +17,11 @@
 	License along with go-iup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package pplot
+package tuio
 
 /*
-#cgo LDFLAGS: -liupcontrols -liuptuio
-#cgo linux LDFLAGS: -liupgtk
-#cgo windows LDFLAGS: -liup -lgdi32 -lole32 -lcomdlg32 -lcomctl32
+#cgo LDFLAGS: -liup -liupcontrols -liuptuio
+#cgo windows LDFLAGS: -lgdi32 -lole32 -lcomdlg32 -lcomctl32
 
 #include <stdlib.h>
 #include <iup.h>
@@ -30,17 +29,17 @@ package pplot
 #include <iuptuio.h>
 */
 import "C"
-import . "github.com/jcowgar/go-iup"
+import . "github.com/grd/go-iup/iup"
 
 var tuioLibOpened = false
 
 func TuioClient(port int) *Ihandle {
 	OpenControlLib()
-	
+
 	if tuioLibOpened == false {
 		C.IupTuioOpen()
 		tuioLibOpened = true
 	}
-	
+
 	return (*Ihandle)(C.IupTuioClient(C.int(port)))
 }

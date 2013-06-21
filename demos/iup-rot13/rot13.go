@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -28,15 +28,15 @@
 package main
 
 import (
-	"strings"
+	"fmt"
 	"io/ioutil"
-
-	"github.com/jcowgar/go-iup"
+	"strings"
+	"github.com/grd/go-iup/iup"
 )
 
 var mainDlg, text *iup.Ihandle
 
-func rot13char(c int) int {
+func rot13char(c rune) rune {
 	if c >= 'a' && c <= 'm' || c >= 'A' && c <= 'M' {
 		return c + 13
 	} else if c >= 'n' && c <= 'z' || c >= 'N' && c <= 'Z' {
@@ -63,7 +63,7 @@ func onLoadFile(ih *iup.Ihandle) int {
 
 	content, err := ioutil.ReadFile(filename)
 	if err != nil {
-		iup.Message("Error", "Error: "+err.String())
+		iup.Message("Error", fmt.Sprintf("Error: %s", err))
 		return iup.IGNORE
 	}
 
@@ -128,4 +128,3 @@ func main() {
 
 	iup.MainLoop()
 }
-

@@ -4,6 +4,10 @@ Iup Go Wrapper
 go-iup is a [Go][1] wrapper around the [Iup][2] GUI toolkit. The project
 was started on April 27, 2011.
 
+https://github.com/grd/go-iup is a fork of https://github.com/jcowgar/go-iup because I got frustrated
+that the original repo just didn't work. And also because I wanted to update it to Go 1.1 and add a
+10 minute quick installation guide. --grd
+
 Changes in go-iup vs. Iup in C
 ------------------------------
 
@@ -67,10 +71,36 @@ Windows, .dll (dynamically linked library) files in your %PATH%.
 Building go-iup
 ---------------
 
-    $ git clone https://github.com/jcowgar/go-iup.git
+    $ git clone https://github.com/grd/go-iup.git
     $ cd go-iup
     $ ./all.bash
-    
+
+Ten minute quick installation guide for Ubuntu 12.04
+----------------------------------------------------
+Fetch the *Linux Libraries* from *sourceforge.net* according the [Iup Download Tips][3] page.
+In this case (Ubuntu 64-bit platform):
+* Im - im-3.8.1_Linux32_64_lib.tar.gz
+* Cd - cd-5.6.1_Linux32_64_lib.tar.gz
+* Iup - iup-3.8_Linux32_64_lib.tar.gz
+
+Take the following steps for *each* of the libraries:
+- Extract the lib
+- In the terminal chdir to the extracted lib.
+    $ sudo bash install
+    $ sudo bash install_dev
+
+Now the libraries are installed.
+
+However, go-iup requires the development libraries from Gtk+ installed. 
+If it's not already installed, execute the following:
+    $ sudo apt-get install libgtk2.0-dev
+
+Installing go-iup.
+    $ go get github.com/grd/go-iup
+    $ <GOPATH>/src/github.com/grd/go-iup/all.bash
+
+That's it. Don't complain if it doesn't work. It's probably your fault.
+
 Special notes for Windows
 -------------------------
 

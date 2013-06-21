@@ -2,12 +2,5 @@
 
 set -eux
 
-for d in iup iup-glcanvas iup-pplot iup-tuio iup-webbrowser demos 
-do
-	gomake -j 4 -C $d "$@"
-done
-
-for d in iup
-do
-	(cd $d && gotest)
-done
+export CGO_CFLAGS="-I/usr/include/iup -I/usr/include/cd -I/usr/include/lm"
+go get github.com/grd/go-iup... "$@"

@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -28,7 +28,6 @@ import "C"
 import "unsafe"
 import "fmt"
 
-
 /*******************************************************************************
  * Supporting Methods
  */
@@ -37,34 +36,34 @@ func Decorate(ih *Ihandle, opt interface{}) {
 	switch v := opt.(type) {
 	case string:
 		SetAttributes(ih, v)
-		
+
 	case MapFunc:
 		SetMapFunc(ih, v)
-		
+
 	case UnmapFunc:
 		SetUnmapFunc(ih, v)
-		
+
 	case DestroyFunc:
 		SetDestroyFunc(ih, v)
-		
+
 	case GetFocusFunc:
 		SetGetFocusFunc(ih, v)
-		
+
 	case KillFocusFunc:
 		SetKillFocusFunc(ih, v)
-		
+
 	case EnterWindowFunc:
 		SetEnterWindowFunc(ih, v)
-		
+
 	case LeaveWindowFunc:
 		SetLeaveWindowFunc(ih, v)
-		
+
 	case KAnyFunc:
 		SetKAnyFunc(ih, v)
-		
+
 	case HelpFunc:
 		SetHelpFunc(ih, v)
-		
+
 	case ButtonFunc:
 		SetButtonFunc(ih, v)
 	}
@@ -81,17 +80,17 @@ func Button(title string, opts ...interface{}) *Ihandle {
 	defer C.free(unsafe.Pointer(cTitle))
 
 	ih := (*Ihandle)(C.IupButton(cTitle, nil))
-	
+
 	for _, o := range opts {
 		switch v := o.(type) {
 		case ActionFunc:
 			SetActionFunc(ih, v)
-			
+
 		default:
 			Decorate(ih, o)
 		}
 	}
-	
+
 	return ih
 }
 
@@ -99,7 +98,7 @@ func Canvas(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupCanvas(nil))
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -112,7 +111,7 @@ func Frame(child *Ihandle, opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupFrame(child.C()))
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -131,7 +130,7 @@ func Label(title string, opts ...interface{}) *Ihandle {
 		switch v := o.(type) {
 		case DropFilesFunc:
 			SetDropFilesFunc(ih, v)
-			
+
 		default:
 			Decorate(ih, o)
 		}
@@ -147,25 +146,25 @@ func List(opts ...interface{}) *Ihandle {
 		switch v := o.(type) {
 		case ListActionFunc:
 			SetListActionFunc(ih, v)
-			
+
 		case CaretFunc:
 			SetCaretFunc(ih, v)
-			
+
 		case DblclickFunc:
 			SetDblclickFunc(ih, v)
-			
+
 		case EditFunc:
 			SetEditFunc(ih, v)
-			
+
 		case MotionFunc:
 			SetMotionFunc(ih, v)
-			
+
 		case MultiselectFunc:
 			SetMultiselectFunc(ih, v)
-			
+
 		case ValueChangedFunc:
 			SetValueChangedFunc(ih, v)
-			
+
 		default:
 			Decorate(ih, o)
 		}
@@ -178,12 +177,12 @@ func ProgressBar(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupProgressBar())
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
 	}
-	
+
 	return ih
 }
 
@@ -191,12 +190,12 @@ func Spin(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupSpin())
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
 	}
-	
+
 	return ih
 }
 
@@ -215,10 +214,10 @@ func Tabsv(args []*Ihandle, opts ...interface{}) *Ihandle {
 		switch v := o.(type) {
 		case TabChangeFunc:
 			SetTabChangeFunc(ih, v)
-			
+
 		case TabChangePosFunc:
 			SetTabChangePosFunc(ih, v)
-			
+
 		default:
 			Decorate(ih, o)
 		}
@@ -268,10 +267,10 @@ func Toggle(title string, opts ...interface{}) *Ihandle {
 		switch v := o.(type) {
 		case ToggleActionFunc:
 			SetToggleActionFunc(ih, v)
-			
+
 		case ValueChangedFunc:
 			SetValueChangedFunc(ih, v)
-			
+
 		default:
 			Decorate(ih, o)
 		}
@@ -284,7 +283,7 @@ func Tree(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupTree())
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -303,7 +302,7 @@ func Val(orientation string, opts ...interface{}) *Ihandle {
 		switch v := o.(type) {
 		case ValueChangedFunc:
 			SetValueChangedFunc(ih, v)
-			
+
 		default:
 			Decorate(ih, o)
 		}
@@ -324,7 +323,7 @@ func Cells(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupCells())
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -339,7 +338,7 @@ func Colorbar(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupColorbar())
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -354,7 +353,7 @@ func ColorBrowser(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupColorBrowser())
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -372,7 +371,7 @@ func Dial(orientation string, opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupDial(cOrientation))
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -387,7 +386,7 @@ func Matrix(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupMatrix(nil))
 
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}

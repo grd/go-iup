@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -47,7 +47,6 @@ func UnMapFont(driverfont string) string {
 
 	return C.GoString(C.IupUnMapFont(cDriverfont))
 }
-
 
 /*******************************************************************************
 **
@@ -141,7 +140,7 @@ func Item(title string, opts ...interface{}) *Ihandle {
 		switch v := o.(type) {
 		case ActionFunc:
 			SetActionFunc(ih, v)
-			
+
 		default:
 			Decorate(ih, v)
 		}

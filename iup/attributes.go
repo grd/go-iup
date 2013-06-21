@@ -28,9 +28,11 @@ void _IupSetfAttributeId2(Ihandle *ih, const char *name, int lin, int col, const
 }
 */
 import "C"
-import "unsafe"
-import "fmt"
-import "bytes"
+import (
+	"unsafe"
+	"fmt"
+	"bytes"
+)
 
 func StoreAttribute(ih *Ihandle, name, value string) {
 	cName := C.CString(name)

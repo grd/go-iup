@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -25,9 +25,9 @@ package iup
 #include <iup.h>
 
 int _IupGetParam(const char *title, const char *format, void **args) {
-	return IupGetParam(title, NULL, 0, format, 
+	return IupGetParam(title, NULL, 0, format,
 		args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9],
-		args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17], args[18], 
+		args[10], args[11], args[12], args[13], args[14], args[15], args[16], args[17], args[18],
 		args[19]
 	);
 }
@@ -39,7 +39,7 @@ import "unsafe"
 // widget. Strings will be interpreted as attributes to set on the newly created dialog.
 func Dialog(child *Ihandle, opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupDialog(child.C()))
-	
+
 	for _, o := range opts {
 		switch v := o.(type) {
 		case string:
@@ -74,9 +74,9 @@ func Popup(ih *Ihandle, x, y int) int {
 
 func FileDlg(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupFileDlg())
-	
+
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -87,9 +87,9 @@ func FileDlg(opts ...interface{}) *Ihandle {
 
 func MessageDlg(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupMessageDlg())
-	
+
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -100,9 +100,9 @@ func MessageDlg(opts ...interface{}) *Ihandle {
 
 func ColorDlg(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupColorDlg())
-	
+
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -113,9 +113,9 @@ func ColorDlg(opts ...interface{}) *Ihandle {
 
 func FontDlg(opts ...interface{}) *Ihandle {
 	ih := (*Ihandle)(C.IupFontDlg())
-	
+
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -165,9 +165,9 @@ func Alarm(t, m string, buttons ...string) int {
 	return int(C.IupAlarm(cT, cM, b1, b2, b3))
 }
 
-// Warning: This allocates 2048 for an incoming buffer size for the filename but if 
-// the user selects a filename more than 2048 characters a buffer over run WILL 
-// occur. This problem has been brought to the attention of the Iup maintainers as 
+// Warning: This allocates 2048 for an incoming buffer size for the filename but if
+// the user selects a filename more than 2048 characters a buffer over run WILL
+// occur. This problem has been brought to the attention of the Iup maintainers as
 // there is no way to tell GetFile how large the receiving buffer actually is.
 func GetFile(filename string) (string, int) {
 	cFilename := make([]C.char, 2048)
@@ -319,26 +319,26 @@ func Message(title, message string) {
 
 func LayoutDialog(ih *Ihandle, opts ...interface{}) *Ihandle {
 	newih := (*Ihandle)(C.IupLayoutDialog(ih.C()))
-	
+
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(newih, o)
 		}
 	}
-	
+
 	return newih
 }
 
 func ElementPropertiesDialog(ih *Ihandle, opts ...interface{}) *Ihandle {
 	newih := (*Ihandle)(C.IupElementPropertiesDialog(ih.C()))
-	
+
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(newih, o)
 		}
 	}
-	
+
 	return newih
 }

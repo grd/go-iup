@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -20,21 +20,21 @@
 package main
 
 import (
-	"github.com/jcowgar/go-iup"
-	"github.com/jcowgar/go-iup/webbrowser"
+	"github.com/grd/go-iup/iup"
+	"github.com/grd/go-iup/iup-webbrowser"
 )
 
 var urlentry, browser *iup.Ihandle
 
 func updateUrlEntry(ih *iup.Ihandle, url string) int {
 	iup.StoreAttribute(urlentry, "VALUE", url)
-	
+
 	return iup.DEFAULT
 }
 
 func onGo(ih *iup.Ihandle) int {
 	iup.StoreAttribute(browser, "VALUE", iup.GetAttribute(urlentry, "VALUE"))
-	
+
 	return iup.DEFAULT
 }
 
@@ -43,34 +43,34 @@ func onUrlEntryKey(ih *iup.Ihandle, ch int) int {
 		onGo(ih)
 		return iup.IGNORE
 	}
-	
+
 	return iup.DEFAULT
 }
 
 func main() {
 	iup.Open()
 	defer iup.Close()
-	
+
 	browserFunc := func(attr, val string) iup.ActionFunc {
 		return (iup.ActionFunc)(func(ih *iup.Ihandle) int {
-				iup.StoreAttribute(browser, attr, val)
-				return iup.DEFAULT
+			iup.StoreAttribute(browser, attr, val)
+			return iup.DEFAULT
 		})
 	}
 
-	urlentry    = iup.Text("EXPAND=HORIZONTAL", (iup.KAnyFunc)(onUrlEntryKey))
-	browser     = webbrowser.WebBrowser("EXPAND=YES", 
-		(webbrowser.NavigateFunc)(updateUrlEntry), 
+	urlentry = iup.Text("EXPAND=HORIZONTAL", (iup.KAnyFunc)(onUrlEntryKey))
+	browser = webbrowser.WebBrowser("EXPAND=YES",
+		(webbrowser.NavigateFunc)(updateUrlEntry),
 		(webbrowser.CompletedFunc)(updateUrlEntry))
-	backbutton := iup.Button("<<",     browserFunc("BACKFORWARD", "-1"))
-	forbutton  := iup.Button(">>",     browserFunc("BACKFORWARD", "1"))
-	relbutton  := iup.Button("Reload", browserFunc("RELOAD", "1"))
-	gobutton   := iup.Button("Go...",  (iup.ActionFunc)(onGo))
-	stopbutton := iup.Button("Stop",   browserFunc("STOP", "1"))
-	toolbar    := iup.SetAttrs(iup.Hbox(backbutton,forbutton,relbutton,urlentry,gobutton,stopbutton), "MARGIN","5x5","GAP","3")
-	dialog     := iup.Dialog(iup.Vbox(toolbar,browser), "SIZE=500x300,TITLE=\"go-iup Web Browser\"")
+	backbutton := iup.Button("<<", browserFunc("BACKFORWARD", "-1"))
+	forbutton := iup.Button(">>", browserFunc("BACKFORWARD", "1"))
+	relbutton := iup.Button("Reload", browserFunc("RELOAD", "1"))
+	gobutton := iup.Button("Go...", (iup.ActionFunc)(onGo))
+	stopbutton := iup.Button("Stop", browserFunc("STOP", "1"))
+	toolbar := iup.SetAttrs(iup.Hbox(backbutton, forbutton, relbutton, urlentry, gobutton, stopbutton), "MARGIN", "5x5", "GAP", "3")
+	dialog := iup.Dialog(iup.Vbox(toolbar, browser), "SIZE=500x300,TITLE=\"go-iup Web Browser\"")
 	iup.Show(dialog)
-	
+
 	iup.StoreAttribute(browser, "VALUE", "http://github.com/jcowgar/go-iup")
 
 	iup.MainLoop()

@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -17,18 +17,22 @@
 	License along with go-iup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Used for various testing during the development of go-iup
 package main
 
-import "github.com/jcowgar/go-iup"
-import "fmt"
+import (
+	"fmt"
+	"github.com/grd/go-iup/iup"
+)
 
 func main() {
 	iup.Open()
 	defer iup.Close()
 
-	err := iup.Load("sample.led")
-	if err != nil {
-		fmt.Printf("Error: %s\n", err.String())
+	switch iup.Alarm("Question", "Are you enjoying go-iup?", "Yes!", "Of course!") {
+	case 1:
+		fmt.Printf("I knew you were!\n")
+
+	case 2:
+		fmt.Printf("Yeah, why wouldn't you be?\n")
 	}
 }

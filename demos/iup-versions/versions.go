@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -17,14 +17,18 @@
 	License along with go-iup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Show a 'Hello World' message box.
+// Display the go-iup and Iup library version numbers.
 package main
 
-import "github.com/jcowgar/go-iup"
+import (
+	"github.com/grd/go-iup/iup"
+	"fmt"
+)
 
 func main() {
 	iup.Open()
 	defer iup.Close()
 
-	iup.Message("Greetings", "Hello, World!")
+	fmt.Printf("go-iup Version=%s\n", iup.IupGoVersion)
+	fmt.Printf("   Iup Version=%s\n", iup.Version())
 }

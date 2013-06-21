@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -20,8 +20,10 @@
 // Hello World using a custom dialog.
 package main
 
-import "github.com/jcowgar/go-iup"
-import "fmt"
+import (
+	"github.com/grd/go-iup/iup"
+	"fmt"
+)
 
 var someone *iup.Ihandle
 

@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -20,26 +20,26 @@
 package main
 
 import (
-	"github.com/jcowgar/go-iup"
-	"github.com/jcowgar/go-iup/pplot"
+	"github.com/grd/go-iup/iup"
+	"github.com/grd/go-iup/iup-pplot"
 )
 
 func main() {
 	iup.Open()
 	defer iup.Close()
-	
+
 	p := pplot.PPlot("EXPAND=YES")
 	iup.StoreAttribute(p, "TITLE", "Bar Mode")
 	iup.StoreAttribute(p, "TITLEFONTSIZE", "16")
 	iup.StoreAttribute(p, "MARGINTOP", "40")
 	iup.StoreAttribute(p, "MARGINLEFT", "30")
-	iup.StoreAttribute(p, "MARGINBOTTOM","65")
-	
+	iup.StoreAttribute(p, "MARGINBOTTOM", "65")
+
 	labels := []string{
-		"Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+		"Jan", "Feb", "Mar", "Apr", "May", "Jun",
 		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
 	values := []float64{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
-	
+
 	pplot.PlotBegin(p, 1)
 	for i := 0; i < len(labels); i++ {
 		pplot.PlotAddStr(p, labels[i], values[i])
@@ -47,11 +47,11 @@ func main() {
 	pplot.PlotEnd(p)
 	iup.StoreAttribute(p, "DS_MODE", "BAR")
 	iup.StoreAttribute(p, "DS_COLOR", "100 100 200")
-	
+
 	dlg := iup.Dialog(p, "SIZE=200x200,TITLE=\"PPlot Example\"")
 	iup.Show(dlg)
-	
+
 	iup.StoreAttribute(p, "REDRAW", "")
-	
+
 	iup.MainLoop()
 }

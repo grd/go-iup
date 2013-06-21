@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-
@@ -20,9 +20,8 @@
 package pplot
 
 /*
-#cgo LDFLAGS: -liupcontrols -liupcd -liup_pplot
-#cgo linux LDFLAGS: -liupgtk
-#cgo windows LDFLAGS: -liup -lgdi32 -lole32 -lcomdlg32 -lcomctl32
+#cgo LDFLAGS: -liup -liupcontrols -liupcd -liup_pplot -lcd
+#cgo windows LDFLAGS: -lgdi32 -lole32 -lcomdlg32 -lcomctl32
 
 #include <stdlib.h>
 #include <iup.h>
@@ -30,12 +29,15 @@ package pplot
 #include <iup_pplot.h>
 */
 import "C"
-import "unsafe"
-import . "github.com/jcowgar/go-iup"
+
+import (
+	"unsafe"
+	. "github.com/grd/go-iup/iup"
+)
 
 /*
  Duplicate utility functions until C types can be exported in Go
- */
+*/
 
 func stringArrayToC(strs []string) []*C.char {
 	max := len(strs)
@@ -69,22 +71,22 @@ func float64ArrayToC(nums []float64) []C.float {
 
 /*
  Actual library code
- */
+*/
 
 var pplotLibOpened = false
 
 func PPlot(opts ...interface{}) *Ihandle {
 	OpenControlLib()
-	
+
 	if pplotLibOpened == false {
 		C.IupPPlotOpen()
 		pplotLibOpened = true
 	}
 
 	ih := (*Ihandle)(C.IupPPlot())
-	
+
 	for _, o := range opts {
-		switch v := o.(type) {
+		switch o.(type) {
 		default:
 			Decorate(ih, o)
 		}
@@ -94,46 +96,46 @@ func PPlot(opts ...interface{}) *Ihandle {
 }
 
 func PlotBegin(ih *Ihandle, strXdata int) {
-	C.IupPlotBegin(ih.C(), C.int(strXdata))
+	C.IupPPlotBegin(ih.C(), C.int(strXdata))
 }
 
 func PlotAdd(ih *Ihandle, x, y float64) {
-	C.IupPlotAdd(ih.C(), C.float(x), C.float(y))
+	C.IupPPlotAdd(ih.C(), C.float(x), C.float(y))
 }
 
 func PlotAddStr(ih *Ihandle, x string, y float64) {
 	cX := C.CString(x)
 	defer C.free(unsafe.Pointer(cX))
 
-	C.IupPlotAddStr(ih.C(), cX, C.float(y))
+	C.IupPPlotAddStr(ih.C(), cX, C.float(y))
 }
 
 func PlotEnd(ih *Ihandle) {
-	C.IupPlotEnd(ih.C())
+	C.IupPPlotEnd(ih.C())
 }
 
 func PlotInsert(ih *Ihandle, index, sample_index int, x, y float64) {
-	C.IupPlotInsert(ih.C(), C.int(index), C.int(sample_index), C.float(x), C.float(y))
+	C.IupPPlotInsert(ih.C(), C.int(index), C.int(sample_index), C.float(x), C.float(y))
 }
 
 func PlotInsertStr(ih *Ihandle, index, sample_index int, x string, y float64) {
 	cX := C.CString(x)
 	defer C.free(unsafe.Pointer(cX))
 
-	C.IupPlotInsertStr(ih.C(), C.int(index), C.int(sample_index), cX, C.float(y))
+	C.IupPPlotInsertStr(ih.C(), C.int(index), C.int(sample_index), cX, C.float(y))
 }
 
-// Differs from IupPlotInsertPoints as `count' is determined automatically in this case
+// Differs from IupPPlotInsertPoints as `count' is determined automatically in this case
 func PlotInsertPoints(ih *Ihandle, index, sample_index int, x, y []float64) {
 	count := len(x)
 	cX := float64ArrayToC(x)
 	cY := float64ArrayToC(y)
 
-	C.IupPlotInsertPoints(ih.C(), C.int(index), C.int(sample_index), &cX[0], &cY[0],
+	C.IupPPlotInsertPoints(ih.C(), C.int(index), C.int(sample_index), &cX[0], &cY[0],
 		C.int(count))
 }
 
-// Differs from IupPlotInsertPoints as `count' is determined automatically in this case
+// Differs from IupPPlotInsertPoints as `count' is determined automatically in this case
 func PlotInsertStrPoints(ih *Ihandle, index, sample_index int, x []string, y []float64) {
 	count := len(x)
 
@@ -142,19 +144,19 @@ func PlotInsertStrPoints(ih *Ihandle, index, sample_index int, x []string, y []f
 
 	cY := float64ArrayToC(y)
 
-	C.IupPlotInsertStrPoints(ih.C(), C.int(index), C.int(sample_index), &cX[0], &cY[0], C.int(count))
+	C.IupPPlotInsertStrPoints(ih.C(), C.int(index), C.int(sample_index), &cX[0], &cY[0], C.int(count))
 }
 
-// Differs from IupPlotInsertPoints as `count' is determined automatically in this case
+// Differs from IupPPlotInsertPoints as `count' is determined automatically in this case
 func PlotAddPoints(ih *Ihandle, index int, x, y []float64) {
 	count := len(x)
 	cX := float64ArrayToC(x)
 	cY := float64ArrayToC(y)
 
-	C.IupPlotAddPoints(ih.C(), C.int(index), &cX[0], &cY[0], C.int(count))
+	C.IupPPlotAddPoints(ih.C(), C.int(index), &cX[0], &cY[0], C.int(count))
 }
 
-// Differs from IupPlotInsertPoints as `count' is determined automatically in this case
+// Differs from IupPPlotInsertPoints as `count' is determined automatically in this case
 func PlotAddStrPoints(ih *Ihandle, index int, x []string, y []float64) {
 	count := len(x)
 
@@ -163,15 +165,14 @@ func PlotAddStrPoints(ih *Ihandle, index int, x []string, y []float64) {
 
 	cY := float64ArrayToC(y)
 
-	C.IupPlotAddStrPoints(ih.C(), C.int(index), &cX[0], &cY[0], C.int(count))
+	C.IupPPlotAddStrPoints(ih.C(), C.int(index), &cX[0], &cY[0], C.int(count))
 }
 
 func PlotTransform(ih *Ihandle, x, y float64) (int, int) {
 	cIX := new(C.int)
 	cIY := new(C.int)
 
-	C.IupPlotTransform(ih.C(), C.float(x), C.float(y), cIX, cIY)
+	C.IupPPlotTransform(ih.C(), C.float(x), C.float(y), cIX, cIY)
 
 	return int(*cIX), int(*cIY)
 }
-

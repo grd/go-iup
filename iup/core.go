@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -20,9 +20,13 @@
 package iup
 
 /*
-#cgo LDFLAGS: -liupcontrols -liupcd -liupim
-#cgo linux LDFLAGS: -liupgtk
-#cgo windows LDFLAGS: -liup -lgdi32 -lole32 -lcomdlg32 -lcomctl32
+#cgo LDFLAGS: -Wl,-Bstatic -lgtk-x11-2.0 -lgdk-x11-2.0 -liup -liupcontrols -liupcd -liupim -lcd -lim -Wl,-Bdynamic
+*/
+
+
+/*
+#cgo LDFLAGS: -liup -liupcontrols -liupcd -liupim -lcd -lim
+#cgo windows LDFLAGS: -lgdi32 -lole32 -lcomdlg32 -lcomctl32
 
 #include <stdlib.h>
 #include <iup.h>
@@ -31,7 +35,7 @@ package iup
 import "C"
 
 import (
-	"os"
+	"errors"
 	"unsafe"
 )
 
@@ -40,6 +44,7 @@ func Open() int {
 }
 
 var controlsLibOpened = false
+
 func OpenControlLib() {
 	if controlsLibOpened == false {
 		C.IupControlsOpen()
@@ -55,25 +60,25 @@ func Version() string {
 	return C.GoString(C.IupVersion())
 }
 
-func Load(filename string) (err os.Error) {
+func Load(filename string) (err error) {
 	cFilename := C.CString(filename)
 	defer C.free(unsafe.Pointer(cFilename))
 
 	cResult := C.IupLoad(cFilename)
 	if cResult != nil {
-		err = os.NewError(C.GoString(cResult))
+		err = errors.New(C.GoString(cResult))
 	}
 
 	return
 }
 
-func LoadBuffer(buffer string) (err os.Error) {
+func LoadBuffer(buffer string) (err error) {
 	cBuffer := C.CString(buffer)
 	defer C.free(unsafe.Pointer(cBuffer))
 
 	cResult := C.IupLoadBuffer(cBuffer)
 	if cResult != nil {
-		err = os.NewError(C.GoString(cResult))
+		err = errors.New(C.GoString(cResult))
 	}
 
 	return

@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -19,21 +19,31 @@
 
 package main
 
+/* TODO: Make this program a single dialog that provides buttons for various
+predefined dialog types */
+
 import (
 	"fmt"
-
-	"github.com/jcowgar/go-iup"
+	"github.com/grd/go-iup/iup"
 )
 
 func main() {
 	iup.Open()
 	defer iup.Close()
 
-	switch iup.Alarm("Question", "Are you enjoying go-iup?", "Yes!", "Of course!") {
-	case 1:
-		fmt.Printf("I knew you were!\n")
+	//filename, code := iup.GetFile("./*.go")
+	//fmt.Printf("code=%d, filename='%s'\n", code, filename)
 
-	case 2:
-		fmt.Printf("Yeah, why wouldn't you be?\n")
-	}
+	//r,g,b := iup.GetColor(0,0,150,180,200)
+	//fmt.Printf("r=%d, g=%d, b=%d\n", r, g, b)
+
+	//value, code := iup.GetText("Address", "123 Main St.\nSmall Town, TN 12345")
+	//fmt.Printf("code=%d value='%s'\n", code, value)
+
+	opts := []string{"John", "Doe", "Jim"}
+	marks := []int{0, 0, 1}
+
+	result, marks := iup.ListDialog(2, "Hello", opts, -1, 1, 10, marks)
+
+	fmt.Printf("%v, %v\n", result, marks)
 }

@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -17,16 +17,15 @@
 	License along with go-iup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Display the go-iup and Iup library version numbers.
-package main
+#include <iup.h>
 
-import "github.com/jcowgar/go-iup"
-import "fmt"
+extern const char* GO_COMPLETED_CB;
+extern const char* GO_ERROR_CB;
+extern const char* GO_NAVIGATE_CB;
+extern const char* GO_NEWWINDOW_CB;
 
-func main() {
-	iup.Open()
-	defer iup.Close()
+extern void goIupSetCompletedFunc(Ihandle *ih, void *f);
+extern void goIupSetErrorFunc(Ihandle *ih, void *f);
+extern void goIupSetNavigateFunc(Ihandle *ih, void *f);
+extern void goIupSetNewWindowFunc(Ihandle *ih, void *f);
 
-	fmt.Printf("go-iup Version=%s\n", iup.IupGoVersion)
-	fmt.Printf("   Iup Version=%s\n", iup.Version())
-}

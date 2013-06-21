@@ -1,7 +1,7 @@
-/* 
+/*
 	Iup wrapper for Go.
 
-	Documentation of this package is minimal on purpose. The Iup 
+	Documentation of this package is minimal on purpose. The Iup
 	documentation is very good and go-iup strives to maintain a
 	one-to-one relation with the C version of Iup. Where go-iup
 	differs from the C variant documentation will exist.

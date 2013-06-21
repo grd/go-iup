@@ -1,4 +1,4 @@
-/* 
+/*
 	Copyright (C) 2011 by Jeremy Cowgar <jeremy@cowgar.com>
 
 	This file is part of go-iup.
@@ -20,59 +20,26 @@
 package webbrowser
 
 /*
-#cgo LDFLAGS: -liupcontrols -liupweb
-#cgo linux LDFLAGS: -liupgtk
-#cgo windows LDFLAGS: -liup -lgdi32 -lole32 -lcomdlg32 -lcomctl32
+#cgo LDFLAGS: -liup -liupcontrols -liupweb
+#cgo windows LDFLAGS: -lgdi32 -lole32 -lcomdlg32 -lcomctl32
 
-#include <stdlib.h>
 #include <iup.h>
 #include <iupweb.h>
-
-#define GO_PREFIX        "_GO_"
-#define IUP_COMPLETED_CB "COMPLETED_CB"
-#define IUP_ERROR_CB     "ERROR_CB"
-#define IUP_NAVIGATE_CB  "NAVIGATE_CB"
-#define IUP_NEWWINDOW_CB "NEWWINDOW_CB"
-
-const char* GO_COMPLETED_CB = GO_PREFIX IUP_COMPLETED_CB;
-const char* GO_ERROR_CB     = GO_PREFIX IUP_ERROR_CB;
-const char* GO_NAVIGATE_CB  = GO_PREFIX IUP_NAVIGATE_CB;
-const char* GO_NEWWINDOW_CB = GO_PREFIX IUP_NEWWINDOW_CB;
-
-extern int goIupCompletedCB(void *, char *);
-void goIupSetCompletedFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_COMPLETED_CB, f);
-	IupSetCallback(ih, IUP_COMPLETED_CB, (Icallback) goIupCompletedCB);
-}
-
-extern int goIupErrorCB(void *, char *);
-void goIupSetErrorFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_ERROR_CB, f);
-	IupSetCallback(ih, IUP_ERROR_CB, (Icallback) goIupErrorCB);
-}
-
-extern int goIupNavigateCB(void *, char *);
-void goIupSetNavigateFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_NAVIGATE_CB, f);
-	IupSetCallback(ih, IUP_NAVIGATE_CB, (Icallback) goIupNavigateCB);
-}
-
-extern int goIupNewWindowCB(void *, char *);
-void goIupSetNewWindowFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_NEWWINDOW_CB, f);
-	IupSetCallback(ih, IUP_NEWWINDOW_CB, (Icallback) goIupNewWindowCB);
-}
+#include "webbrowser.h"
 */
 import "C"
-import "unsafe"
-import . "github.com/jcowgar/go-iup"
+
+import (
+	"unsafe"
+	. "github.com/grd/go-iup/iup"
+)
 
 var webBrowserLibOpened = false
 
 type CompletedFunc func(*Ihandle, string) int
 
 //export goIupCompletedCB
-func goIupCompletedCB(ih unsafe.Pointer, url unsafe.Pointer) int {
+func goIupCompletedCB(ih unsafe.Pointer, url *C.char) int {
 	h := (*C.Ihandle)(ih)
 	f := *(*CompletedFunc)(unsafe.Pointer(C.IupGetAttribute(h, C.GO_COMPLETED_CB)))
 	goUrl := C.GoString((*C.char)(url))
@@ -86,7 +53,7 @@ func SetCompletedFunc(ih *Ihandle, f CompletedFunc) {
 type ErrorFunc func(*Ihandle, string) int
 
 //export goIupErrorCB
-func goIupErrorCB(ih unsafe.Pointer, url unsafe.Pointer) int {
+func goIupErrorCB(ih unsafe.Pointer, url *C.char) int {
 	h := (*C.Ihandle)(ih)
 	f := *(*ErrorFunc)(unsafe.Pointer(C.IupGetAttribute(h, C.GO_ERROR_CB)))
 	goUrl := C.GoString((*C.char)(url))
@@ -100,7 +67,7 @@ func SetErrorFunc(ih *Ihandle, f ErrorFunc) {
 type NavigateFunc func(*Ihandle, string) int
 
 //export goIupNavigateCB
-func goIupNavigateCB(ih unsafe.Pointer, url unsafe.Pointer) int {
+func goIupNavigateCB(ih unsafe.Pointer, url *C.char) int {
 	h := (*C.Ihandle)(ih)
 	f := *(*NavigateFunc)(unsafe.Pointer(C.IupGetAttribute(h, C.GO_NAVIGATE_CB)))
 	goUrl := C.GoString((*C.char)(url))
@@ -114,7 +81,7 @@ func SetNavigateFunc(ih *Ihandle, f NavigateFunc) {
 type NewWindowFunc func(*Ihandle, string) int
 
 //export goIupNewWindowCB
-func goIupNewWindowCB(ih unsafe.Pointer, url unsafe.Pointer) int {
+func goIupNewWindowCB(ih unsafe.Pointer, url *C.char) int {
 	h := (*C.Ihandle)(ih)
 	f := *(*NewWindowFunc)(unsafe.Pointer(C.IupGetAttribute(h, C.GO_NEWWINDOW_CB)))
 	goUrl := C.GoString((*C.char)(url))
@@ -137,16 +104,16 @@ func WebBrowser(opts ...interface{}) *Ihandle {
 		switch v := o.(type) {
 		case CompletedFunc:
 			SetCompletedFunc(ih, v)
-			
+
 		case ErrorFunc:
 			SetErrorFunc(ih, v)
-			
+
 		case NavigateFunc:
 			SetNavigateFunc(ih, v)
-			
+
 		case NewWindowFunc:
 			SetNewWindowFunc(ih, v)
-		
+
 		default:
 			Decorate(ih, o)
 		}
