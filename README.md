@@ -4,8 +4,11 @@ Iup Go Wrapper
 go-iup is a [Go][1] wrapper around the [Iup][2] GUI toolkit. The project
 was started on April 27, 2011.
 
+Fork
+----
+
 https://github.com/grd/go-iup is a fork of https://github.com/jcowgar/go-iup because I got frustrated
-that the original repo just didn't work. And also because I wanted to update it to Go 1.1 and add a
+that the original repo just didn't work and appeared abandoned. I wanted to update it to Go 1.1 and add a
 10 minute quick installation guide. --grd
 
 Changes in go-iup vs. Iup in C
@@ -85,7 +88,8 @@ In this case (Ubuntu 64-bit platform):
 
 Take the following steps for *each* of the libraries:
 - Extract the lib
-- In the terminal chdir to the extracted lib.
+
+    $ cd <extracted library>
     $ sudo bash install
     $ sudo bash install_dev
 
@@ -93,9 +97,11 @@ Now the libraries are installed.
 
 However, go-iup requires the development libraries from Gtk+ installed. 
 If it's not already installed, execute the following:
+
     $ sudo apt-get install libgtk2.0-dev
 
 Installing go-iup.
+
     $ go get github.com/grd/go-iup
     $ <GOPATH>/src/github.com/grd/go-iup/all.bash
 
