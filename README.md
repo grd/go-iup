@@ -4,8 +4,7 @@ Iup Go Wrapper
 go-iup is a [Go][1] wrapper around the [Iup][2] GUI toolkit. The project
 was started on April 27, 2011.
 
-Fork
-----
+### Fork ###
 
 https://github.com/grd/go-iup is a fork of https://github.com/jcowgar/go-iup because I got frustrated
 that the original repo just didn't work and appeared abandoned. I wanted to update it to Go 1.1 and add a
@@ -78,18 +77,17 @@ Building go-iup
     $ cd go-iup
     $ ./all.bash
 
-Ten minute quick installation guide for Ubuntu 12.04
-----------------------------------------------------
+### Ten minute quick installation guide for Ubuntu 12.04 ###
+
 Fetch the *Linux Libraries* from *sourceforge.net* according the [Iup Download Tips][3] page.
 In this case (Ubuntu 64-bit platform):
 * Im - im-3.8.1_Linux32_64_lib.tar.gz
 * Cd - cd-5.6.1_Linux32_64_lib.tar.gz
 * Iup - iup-3.8_Linux32_64_lib.tar.gz
 
-Take the following steps for *each* of the libraries:
-- Extract the lib
+Extract the libraries and then take the following steps for *each* of the libraries:
 
-    $ cd <extracted library>
+    $ cd *extracted library*
     $ sudo bash install
     $ sudo bash install_dev
 
