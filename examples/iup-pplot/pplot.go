@@ -20,8 +20,8 @@
 package main
 
 import (
-	"github.com/grd/go-iup/iup"
-	"github.com/grd/go-iup/iup-pplot"
+	"github.com/grd/iup"
+	"github.com/grd/iup/pplot"
 )
 
 func main() {

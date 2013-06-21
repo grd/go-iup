@@ -21,7 +21,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/grd/go-iup/iup"
+	"github.com/grd/iup"
 )
 
 func main() {

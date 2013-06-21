@@ -28,7 +28,7 @@ package glcanvas
 #include <iupgl.h>
 */
 import "C"
-import . "github.com/grd/go-iup/iup"
+import . "github.com/grd/iup"
 
 func GLCanvas(opts ...interface{}) *Ihandle {
 	OpenControlLib()

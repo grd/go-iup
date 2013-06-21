@@ -21,7 +21,7 @@
 package main
 
 import (
-	"github.com/grd/go-iup/iup"
+	"github.com/grd/iup"
 	"fmt"
 )
 

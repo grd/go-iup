@@ -31,7 +31,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
-	"github.com/grd/go-iup/iup"
+	"github.com/grd/iup"
 )
 
 var mainDlg, text *iup.Ihandle

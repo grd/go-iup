@@ -20,8 +20,8 @@
 package main
 
 import (
-	"github.com/grd/go-iup/iup"
-	"github.com/grd/go-iup/iup-webbrowser"
+	"github.com/grd/iup"
+	"github.com/grd/iup/webbrowser"
 )
 
 var urlentry, browser *iup.Ihandle

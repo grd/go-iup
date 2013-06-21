@@ -32,7 +32,7 @@ import "C"
 
 import (
 	"unsafe"
-	. "github.com/grd/go-iup/iup"
+	. "github.com/grd/iup"
 )
 
 /*

@@ -17,18 +17,14 @@
 	License along with go-iup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Display the go-iup and Iup library version numbers.
+// Show a 'Hello World' message box.
 package main
 
-import (
-	"github.com/grd/go-iup/iup"
-	"fmt"
-)
+import "github.com/grd/iup"
 
 func main() {
 	iup.Open()
 	defer iup.Close()
 
-	fmt.Printf("go-iup Version=%s\n", iup.IupGoVersion)
-	fmt.Printf("   Iup Version=%s\n", iup.Version())
+	iup.Message("Greetings", "Hello, World!")
 }

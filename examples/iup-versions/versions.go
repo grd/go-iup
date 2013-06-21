@@ -17,22 +17,18 @@
 	License along with go-iup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// Display the go-iup and Iup library version numbers.
 package main
 
 import (
+	"github.com/grd/iup"
 	"fmt"
-	"github.com/grd/go-iup/iup"
 )
 
 func main() {
 	iup.Open()
 	defer iup.Close()
 
-	switch iup.Alarm("Question", "Are you enjoying go-iup?", "Yes!", "Of course!") {
-	case 1:
-		fmt.Printf("I knew you were!\n")
-
-	case 2:
-		fmt.Printf("Yeah, why wouldn't you be?\n")
-	}
+	fmt.Printf("go-iup Version=%s\n", iup.IupGoVersion)
+	fmt.Printf("   Iup Version=%s\n", iup.Version())
 }

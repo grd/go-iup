@@ -17,14 +17,33 @@
 	License along with go-iup.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Show a 'Hello World' message box.
 package main
 
-import "github.com/grd/go-iup/iup"
+/* TODO: Make this program a single dialog that provides buttons for various
+predefined dialog types */
+
+import (
+	"fmt"
+	"github.com/grd/iup"
+)
 
 func main() {
 	iup.Open()
 	defer iup.Close()
 
-	iup.Message("Greetings", "Hello, World!")
+	//filename, code := iup.GetFile("./*.go")
+	//fmt.Printf("code=%d, filename='%s'\n", code, filename)
+
+	//r,g,b := iup.GetColor(0,0,150,180,200)
+	//fmt.Printf("r=%d, g=%d, b=%d\n", r, g, b)
+
+	//value, code := iup.GetText("Address", "123 Main St.\nSmall Town, TN 12345")
+	//fmt.Printf("code=%d value='%s'\n", code, value)
+
+	opts := []string{"John", "Doe", "Jim"}
+	marks := []int{0, 0, 1}
+
+	result, marks := iup.ListDialog(2, "Hello", opts, -1, 1, 10, marks)
+
+	fmt.Printf("%v, %v\n", result, marks)
 }

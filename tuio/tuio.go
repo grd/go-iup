@@ -29,7 +29,7 @@ package tuio
 #include <iuptuio.h>
 */
 import "C"
-import . "github.com/grd/go-iup/iup"
+import . "github.com/grd/iup"
 
 var tuioLibOpened = false
 
