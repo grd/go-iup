@@ -28,7 +28,7 @@ func main() {
 	iup.Open()
 	defer iup.Close()
 
-	p := pplot.PPlot("EXPAND=YES")
+	p := pplot.Open("EXPAND=YES")
 	iup.StoreAttribute(p, "TITLE", "Bar Mode")
 	iup.StoreAttribute(p, "TITLEFONTSIZE", "16")
 	iup.StoreAttribute(p, "MARGINTOP", "40")
@@ -40,11 +40,11 @@ func main() {
 		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"}
 	values := []float64{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}
 
-	pplot.PlotBegin(p, 1)
+	pplot.Begin(p, 1)
 	for i := 0; i < len(labels); i++ {
-		pplot.PlotAddStr(p, labels[i], values[i])
+		pplot.AddString(p, labels[i], values[i])
 	}
-	pplot.PlotEnd(p)
+	pplot.End(p)
 	iup.StoreAttribute(p, "DS_MODE", "BAR")
 	iup.StoreAttribute(p, "DS_COLOR", "100 100 200")
 

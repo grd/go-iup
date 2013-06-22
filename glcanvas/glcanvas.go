@@ -28,43 +28,43 @@ package glcanvas
 #include <iupgl.h>
 */
 import "C"
-import . "github.com/grd/iup"
+import "github.com/grd/iup"
 
-func GLCanvas(opts ...interface{}) *Ihandle {
-	OpenControlLib()
+func Canvas(opts ...interface{}) *iup.Ihandle {
+	iup.OpenControlLib()
 
-	ih := (*Ihandle)(C.IupGLCanvas(nil))
+	ih := (*iup.Ihandle)(C.IupGLCanvas(nil))
 
 	for _, o := range opts {
 		switch o.(type) {
 		default:
-			Decorate(ih, o)
+			iup.Decorate(ih, o)
 		}
 	}
 
 	return ih
 }
 
-func GLMakeCurrent(ih *Ihandle) {
+func MakeCurrent(ih *iup.Ihandle) {
 	C.IupGLMakeCurrent(ih.C())
 }
 
-func GLIsCurrent(ih *Ihandle) int {
+func IsCurrent(ih *iup.Ihandle) int {
 	return int(C.IupGLIsCurrent(ih.C()))
 }
 
-func GLSwapBuffers(ih *Ihandle) {
+func SwapBuffers(ih *iup.Ihandle) {
 	C.IupGLSwapBuffers(ih.C())
 }
 
-func GLPalette(ih *Ihandle, index int, r, g, b float64) {
+func Palette(ih *iup.Ihandle, index int, r, g, b float64) {
 	C.IupGLPalette(ih.C(), C.int(index), C.float(r), C.float(g), C.float(b))
 }
 
-func GLUseFont(ih *Ihandle, first, count, list_base int) {
+func UseFont(ih *iup.Ihandle, first, count, list_base int) {
 	C.IupGLUseFont(ih.C(), C.int(first), C.int(count), C.int(list_base))
 }
 
-func GLWait(gl int) {
+func Wait(gl int) {
 	C.IupGLWait(C.int(gl))
 }
