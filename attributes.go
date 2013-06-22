@@ -54,18 +54,24 @@ func StoreAttributeId(ih *Ihandle, name string, id int, value string) {
 	C.IupStoreAttributeId((*C.Ihandle)(ih), cName, C.int(id), cValue)
 }
 
-func SetAttribute(ih *Ihandle, name string, value unsafe.Pointer) {
+func SetAttribute(ih *Ihandle, name, value string) {
 	cName := C.CString(name)
 	defer C.free(unsafe.Pointer(cName))
 
-	C.IupSetAttribute((*C.Ihandle)(ih), cName, (*C.char)(value))
+	cValue := C.CString(value)
+	defer C.free(unsafe.Pointer(cValue))
+
+	C.IupSetAttribute(ih.C(), cName, cValue)
 }
 
-func SetAttributeId(ih *Ihandle, name string, id int, value unsafe.Pointer) {
+func SetAttributeId(ih *Ihandle, name string, id int, value string) {
 	cName := C.CString(name)
 	defer C.free(unsafe.Pointer(cName))
 
-	C.IupSetAttributeId((*C.Ihandle)(ih), cName, C.int(id), (*C.char)(value))
+	cValue := C.CString(value)
+	defer C.free(unsafe.Pointer(cValue))
+
+	C.IupSetAttributeId((*C.Ihandle)(ih), cName, C.int(id), cValue)
 }
 
 func SetfAttribute(ih *Ihandle, name, format string, args ...interface{}) {
@@ -196,11 +202,14 @@ func StoreGlobal(name, value string) {
 	C.IupStoreGlobal(cName, cValue)
 }
 
-func SetGlobal(name string, value unsafe.Pointer) {
+func SetGlobal(name string, value string) {
 	cName := C.CString(name)
 	defer C.free(unsafe.Pointer(cName))
 
-	C.IupSetGlobal(cName, (*C.char)(value))
+	cValue := C.CString(value)
+	defer C.free(unsafe.Pointer(cValue))
+
+	C.IupSetGlobal(cName, cValue)
 }
 
 func GetGlobal(name string) string {
