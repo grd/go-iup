@@ -112,7 +112,39 @@ the libraries for MinGW. For easy compliation you should have already installed 
 version of MinGW and MSYS. Building will be the same as any other platform but started from
 the MSYS Bash shell.
 
+
+### Quick installation guide for Windows ###
+
+Make sure MinGW is installed and that it contains the C++ libraries! 
+MinGW with installer is 32-bit only, and for simplicity that what we use.
+
+Fetch the *Windows Shared Libraries* from *sourceforge.net* according the [Iup Download Tips][3] page.
+In this case:
+* Im - im-3.8.1_Win32_dllw4_lib.zip
+* Cd - cd-5.6.1_Win32_dllw4_lib.zip
+* Iup - iup-3.8_Win32_dllw4_lib.zip
+
+Extract the libraries to a destination of choice, for instance C:\iup.
+Make sure that the dll's and .a's are placed directly in this dir and the include files are in the include directory. 
+Open the command prompt and execute the following:
+
+    C:\> set IUPHOME=C:\iup
+    
+With C:\iup I mean the location where the iup files are placed.
+
+Installing Go iup.
+
+    C:\> go get github.com/grd/iup 
+
+(Or download the zip file from github.com)
+
+    C:\> <GOPATH>/src/github.com/grd/iup/all
+
+Again that's it. Don't complain if it doesn't work. It's probably your fault.
+
+
 [1]: http://golang.org                                       "Go"
 [2]: http://www.tecgraf.puc-rio.br/iup/                      "Iup"
 [3]: http://www.tecgraf.puc-rio.br/iup/en/download_tips.html "Iup Download Tips"
 [4]: http://www.tecgraf.puc-rio.br/                          "Tecgraf"
+

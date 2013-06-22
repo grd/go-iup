@@ -20,8 +20,9 @@
 package webbrowser
 
 /*
-#cgo LDFLAGS: -liup -liupcontrols -liupweb
-#cgo windows LDFLAGS: -lgdi32 -lole32 -lcomdlg32 -lcomctl32
+#cgo LDFLAGS: -liup -liupcontrols 
+#cgo linux LDFLAGS: -liupweb
+#cgo windows LDFLAGS: -liupole -lgdi32 -lole32 -lcomdlg32 -lcomctl32
 
 #include <iup.h>
 #include <iupweb.h>

@@ -20,11 +20,7 @@
 package iup
 
 /*
-#cgo LDFLAGS: -Wl,-Bstatic -lgtk-x11-2.0 -lgdk-x11-2.0 -liup -liupcontrols -liupcd -liupim -lcd -lim -Wl,-Bdynamic
-*/
-
-
-/*
+#cgo linux CFLAGS: -I/usr/include/iup -I/usr/include/cd -I/usr/include/im
 #cgo LDFLAGS: -liup -liupcontrols -liupcd -liupim -lcd -lim
 #cgo windows LDFLAGS: -lgdi32 -lole32 -lcomdlg32 -lcomctl32
 
