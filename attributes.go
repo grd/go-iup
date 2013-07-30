@@ -218,3 +218,11 @@ func GetGlobal(name string) string {
 
 	return C.GoString(C.IupGetGlobal(cName))
 }
+
+func GetHandle(name string) *Ihandle {
+	cName := C.CString(name)
+	defer C.free(unsafe.Pointer(cName))
+
+	return (*Ihandle)(C.IupGetHandle(cName))
+}
+
