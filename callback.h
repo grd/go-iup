@@ -59,6 +59,7 @@ extern const char *GO_VALUECHANGED_CB;
 extern const char *GO_TABCHANGE_CB;
 extern const char *GO_TABCHANGEPOS_CB;
 extern const char *GO_SPIN_CB;
+extern const char *GO_IDLE_ACTION;
 
 
 extern void goIupSetMapFunc(Ihandle *ih, void *f);
@@ -86,6 +87,6 @@ extern void goIupSetToggleActionFunc(Ihandle *ih, void *f);
 extern void goIupSetTabChangeFunc(Ihandle *ih, void *f);
 extern void goIupSetTabChangePosFunc(Ihandle *ih, void *f);
 extern void goIupSetSpinFunc(Ihandle *ih, void *f);
-
+extern void goIupSetIdleFunc(void *f);
 #endif
 

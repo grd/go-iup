@@ -45,7 +45,7 @@ const char *GO_VALUECHANGED_CB = GO_PREFIX IUP_VALUECHANGED_CB;
 const char *GO_TABCHANGE_CB = GO_PREFIX IUP_TABCHANGE_CB;
 const char *GO_TABCHANGEPOS_CB = GO_PREFIX IUP_TABCHANGEPOS_CB;
 const char *GO_SPIN_CB = GO_PREFIX IUP_SPIN_CB;
-
+const char *GO_IDLE_ACTION = GO_PREFIX IUP_IDLE_ACTION;
 
 void goIupSetMapFunc(Ihandle *ih, void *f) {
 	IupSetCallback(ih, GO_MAP_CB, f);
@@ -172,3 +172,7 @@ void goIupSetSpinFunc(Ihandle *ih, void *f) {
 	IupSetCallback(ih, IUP_SPIN_CB, (Icallback) goIupSpinCB);
 }
 
+void goIupSetIdleFunc(void *f) {
+	IupSetFunction(GO_IDLE_ACTION, f);
+	IupSetFunction(IUP_IDLE_ACTION, (Icallback) goIupIdleCB);
+}

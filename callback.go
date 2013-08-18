@@ -347,3 +347,15 @@ func goIupSpinCB(ih unsafe.Pointer, inc int) int {
 func SetSpinFunc(ih *Ihandle, f SpinFunc) {
 	C.goIupSetSpinFunc((*C.Ihandle)(ih), unsafe.Pointer(&f))
 }
+
+type IdleFunc func() int
+
+//export goIupIdleCB
+func goIupIdleCB() int {
+	f := *(*IdleFunc)(unsafe.Pointer(C.IupGetFunction(C.GO_IDLE_ACTION)))
+	return f()
+}
+
+func SetIdleFunc(f IdleFunc) {
+	C.goIupSetIdleFunc(unsafe.Pointer(&f))
+}
