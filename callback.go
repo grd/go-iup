@@ -347,3 +347,26 @@ func goIupSpinCB(ih unsafe.Pointer, inc int) int {
 func SetSpinFunc(ih *Ihandle, f SpinFunc) {
 	C.goIupSetSpinFunc((*C.Ihandle)(ih), unsafe.Pointer(&f))
 }
+
+type IdleFunc func() int
+
+//export goIupIdleCB
+func goIupIdleCB() int {
+	f := *(*IdleFunc)(unsafe.Pointer(C.IupGetFunction(C.GO_IDLE_ACTION)))
+	return f()
+}
+
+// The user idle callback function can use a select on input channels and a time.After() to process
+// external events without taking too much CPU (idle loop can behave almost like an infinite loop otherwise)
+// Example:
+// func idleFunc() int {
+//     select {
+//     case cmd := <-idleChan:
+//         // process cmd
+//     case <-time.After(time.Duration(150 * time.Millisecond)):
+//     }
+//     return iup.DEFAULT
+// }
+func SetIdleFunc(f IdleFunc) {
+	C.goIupSetIdleFunc(unsafe.Pointer(&f))
+}
