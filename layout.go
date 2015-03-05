@@ -156,6 +156,18 @@ func Zboxv(args []*Ihandle) *Ihandle {
 	return zboxv(IHandleArrayToC(args))
 }
 
+func gridboxv(ihs []*C.Ihandle) *Ihandle {
+	return (*Ihandle)(C.IupGridBoxv(&ihs[0]))
+}
+
+func GridBox(args ...*Ihandle) *Ihandle {
+	return gridboxv(IHandleArrayToC(args))
+}
+
+func GridBoxv(args []*Ihandle) *Ihandle {
+	return gridboxv(IHandleArrayToC(args))
+}
+
 func Radio(child *Ihandle) *Ihandle {
 	return (*Ihandle)(C.IupRadio(child.C()))
 }

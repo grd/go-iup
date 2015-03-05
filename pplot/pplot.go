@@ -96,33 +96,33 @@ func Open(opts ...interface{}) *iup.Ihandle {
 }
 
 func Begin(ih *iup.Ihandle, strXdata int) {
-	C.IupPPlotBegin(ih.C(), C.int(strXdata))
+	C.IupPPlotBegin((*C.Ihandle)(ih), C.int(strXdata))
 }
 
 func Add(ih *iup.Ihandle, x, y float64) {
-	C.IupPPlotAdd(ih.C(), C.float(x), C.float(y))
+	C.IupPPlotAdd((*C.Ihandle)(ih), C.float(x), C.float(y))
 }
 
 func AddString(ih *iup.Ihandle, x string, y float64) {
 	cX := C.CString(x)
 	defer C.free(unsafe.Pointer(cX))
 
-	C.IupPPlotAddStr(ih.C(), cX, C.float(y))
+	C.IupPPlotAddStr((*C.Ihandle)(ih), cX, C.float(y))
 }
 
 func End(ih *iup.Ihandle) {
-	C.IupPPlotEnd(ih.C())
+	C.IupPPlotEnd((*C.Ihandle)(ih))
 }
 
 func Insert(ih *iup.Ihandle, index, sample_index int, x, y float64) {
-	C.IupPPlotInsert(ih.C(), C.int(index), C.int(sample_index), C.float(x), C.float(y))
+	C.IupPPlotInsert((*C.Ihandle)(ih), C.int(index), C.int(sample_index), C.float(x), C.float(y))
 }
 
 func InsertString(ih *iup.Ihandle, index, sample_index int, x string, y float64) {
 	cX := C.CString(x)
 	defer C.free(unsafe.Pointer(cX))
 
-	C.IupPPlotInsertStr(ih.C(), C.int(index), C.int(sample_index), cX, C.float(y))
+	C.IupPPlotInsertStr((*C.Ihandle)(ih), C.int(index), C.int(sample_index), cX, C.float(y))
 }
 
 func InsertPoints(ih *iup.Ihandle, index, sample_index int, x, y []float64) {
@@ -130,7 +130,7 @@ func InsertPoints(ih *iup.Ihandle, index, sample_index int, x, y []float64) {
 	cX := float64ArrayToC(x)
 	cY := float64ArrayToC(y)
 
-	C.IupPPlotInsertPoints(ih.C(), C.int(index), C.int(sample_index), &cX[0], &cY[0],
+	C.IupPPlotInsertPoints((*C.Ihandle)(ih), C.int(index), C.int(sample_index), &cX[0], &cY[0],
 		C.int(count))
 }
 
@@ -143,7 +143,7 @@ func InsertStringPoints(ih *iup.Ihandle, index, sample_index int, x []string, y 
 
 	cY := float64ArrayToC(y)
 
-	C.IupPPlotInsertStrPoints(ih.C(), C.int(index), C.int(sample_index), &cX[0], &cY[0], C.int(count))
+	C.IupPPlotInsertStrPoints((*C.Ihandle)(ih), C.int(index), C.int(sample_index), &cX[0], &cY[0], C.int(count))
 }
 
 func AddPoints(ih *iup.Ihandle, index int, x, y []float64) {
@@ -151,7 +151,7 @@ func AddPoints(ih *iup.Ihandle, index int, x, y []float64) {
 	cX := float64ArrayToC(x)
 	cY := float64ArrayToC(y)
 
-	C.IupPPlotAddPoints(ih.C(), C.int(index), &cX[0], &cY[0], C.int(count))
+	C.IupPPlotAddPoints((*C.Ihandle)(ih), C.int(index), &cX[0], &cY[0], C.int(count))
 }
 
 func AddStringPoints(ih *iup.Ihandle, index int, x []string, y []float64) {
@@ -162,14 +162,14 @@ func AddStringPoints(ih *iup.Ihandle, index int, x []string, y []float64) {
 
 	cY := float64ArrayToC(y)
 
-	C.IupPPlotAddStrPoints(ih.C(), C.int(index), &cX[0], &cY[0], C.int(count))
+	C.IupPPlotAddStrPoints((*C.Ihandle)(ih), C.int(index), &cX[0], &cY[0], C.int(count))
 }
 
 func Transform(ih *iup.Ihandle, x, y float64) (int, int) {
 	cIX := new(C.int)
 	cIY := new(C.int)
 
-	C.IupPPlotTransform(ih.C(), C.float(x), C.float(y), cIX, cIY)
+	C.IupPPlotTransform((*C.Ihandle)(ih), C.float(x), C.float(y), cIX, cIY)
 
 	return int(*cIX), int(*cIY)
 }

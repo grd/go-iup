@@ -35,6 +35,9 @@ import (
 	"unsafe"
 )
 
+
+var cstrings []unsafe.Pointer
+
 func Open() int {
 	return int(C.IupOpen(nil, nil))
 }
@@ -50,6 +53,10 @@ func OpenControlLib() {
 
 func Close() {
 	C.IupClose()
+	// Free all the C strings that have been allocated
+	for _, ptr := range cstrings {
+		C.free(ptr)
+	}
 }
 
 func Version() string {

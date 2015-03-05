@@ -46,23 +46,23 @@ func Canvas(opts ...interface{}) *iup.Ihandle {
 }
 
 func MakeCurrent(ih *iup.Ihandle) {
-	C.IupGLMakeCurrent(ih.C())
+	C.IupGLMakeCurrent((*C.Ihandle)(ih))
 }
 
 func IsCurrent(ih *iup.Ihandle) int {
-	return int(C.IupGLIsCurrent(ih.C()))
+	return int(C.IupGLIsCurrent((*C.Ihandle)(ih)))
 }
 
 func SwapBuffers(ih *iup.Ihandle) {
-	C.IupGLSwapBuffers(ih.C())
+	C.IupGLSwapBuffers((*C.Ihandle)(ih))
 }
 
 func Palette(ih *iup.Ihandle, index int, r, g, b float64) {
-	C.IupGLPalette(ih.C(), C.int(index), C.float(r), C.float(g), C.float(b))
+	C.IupGLPalette((*C.Ihandle)(ih), C.int(index), C.float(r), C.float(g), C.float(b))
 }
 
 func UseFont(ih *iup.Ihandle, first, count, list_base int) {
-	C.IupGLUseFont(ih.C(), C.int(first), C.int(count), C.int(list_base))
+	C.IupGLUseFont((*C.Ihandle)(ih), C.int(first), C.int(count), C.int(list_base))
 }
 
 func Wait(gl int) {

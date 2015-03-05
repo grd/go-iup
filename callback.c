@@ -45,65 +45,67 @@ const char *GO_VALUECHANGED_CB = GO_PREFIX IUP_VALUECHANGED_CB;
 const char *GO_TABCHANGE_CB = GO_PREFIX IUP_TABCHANGE_CB;
 const char *GO_TABCHANGEPOS_CB = GO_PREFIX IUP_TABCHANGEPOS_CB;
 const char *GO_SPIN_CB = GO_PREFIX IUP_SPIN_CB;
+const char *GO_SHOW_CB = GO_PREFIX IUP_SHOW_CB;
+const char *GO_TRAYCLICK_CB = GO_PREFIX IUP_TRAYCLICK_CB;
 const char *GO_IDLE_ACTION = GO_PREFIX IUP_IDLE_ACTION;
 
-void goIupSetMapFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_MAP_CB, f);
+void goIupSetMapFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_MAP_CB, f);
 	IupSetCallback(ih, IUP_MAP_CB, (Icallback) goIupMapCB);
 }
 
-void goIupSetUnmapFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_UNMAP_CB, f);
+void goIupSetUnmapFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_UNMAP_CB, f);
 	IupSetCallback(ih, IUP_UNMAP_CB, (Icallback) goIupUnmapCB);
 }
 
-void goIupSetDestroyFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_DESTROY_CB, f);
+void goIupSetDestroyFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_DESTROY_CB, f);
 	IupSetCallback(ih, IUP_DESTROY_CB, (Icallback) goIupDestroyCB);
 }
 
-void goIupSetGetFocusFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_GETFOCUS_CB, f);
+void goIupSetGetFocusFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_GETFOCUS_CB, f);
 	IupSetCallback(ih, IUP_GETFOCUS_CB, (Icallback) goIupGetFocusCB);
 }
 
-void goIupSetKillFocusFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_KILLFOCUS_CB, f);
+void goIupSetKillFocusFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_KILLFOCUS_CB, f);
 	IupSetCallback(ih, IUP_KILLFOCUS_CB, (Icallback) goIupKillFocusCB);
 }
 
-void goIupSetEnterWindowFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_ENTERWINDOW_CB, f);
+void goIupSetEnterWindowFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_ENTERWINDOW_CB, f);
 	IupSetCallback(ih, IUP_ENTERWINDOW_CB, (Icallback) goIupEnterWindowCB);
 }
 
-void goIupSetLeaveWindowFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_LEAVEWINDOW_CB, f);
+void goIupSetLeaveWindowFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_LEAVEWINDOW_CB, f);
 	IupSetCallback(ih, IUP_LEAVEWINDOW_CB, (Icallback) goIupLeaveWindowCB);
 }
 
-void goIupSetKAnyFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_K_ANY_CB, f);
+void goIupSetKAnyFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_K_ANY_CB, f);
 	IupSetCallback(ih, IUP_K_ANY, (Icallback) goIupKAnyCB);
 }
 
-void goIupSetHelpFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_HELP_CB, f);
+void goIupSetHelpFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_HELP_CB, f);
 	IupSetCallback(ih, IUP_HELP_CB, (Icallback) goIupHelpCB);
 }
 
-void goIupSetButtonFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_BUTTON_CB, f);
+void goIupSetButtonFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_BUTTON_CB, f);
 	IupSetCallback(ih, IUP_BUTTON_CB, (Icallback) goIupButtonCB);
 }
 
-void goIupSetDropFilesFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_DROPFILES_CB, f);
+void goIupSetDropFilesFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_DROPFILES_CB, f);
 	IupSetCallback(ih, IUP_DROPFILES_CB, (Icallback) goIupDropFilesCB);
 }
 
-void goIupSetActionFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_ACTION, f);
+void goIupSetActionFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_ACTION, f);
 	IupSetCallback(ih, IUP_ACTION, (Icallback) goIupActionCB);
 }
 
@@ -112,67 +114,76 @@ void goSetFunc(Ihandle *ih, char *goName, void *gof, char *cName, void *cf) {
 	IupSetCallback(ih, cName, cf);
 }
 
-void goIupSetListActionFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_LIST_ACTION, f);
+void goIupSetListActionFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_LIST_ACTION, f);
 	IupSetCallback(ih, IUP_ACTION, (Icallback) goIupListActionCB);
 }
 
-void goIupSetCaretFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_CARET_CB, f);
+void goIupSetCaretFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_CARET_CB, f);
 	IupSetCallback(ih, IUP_CARET_CB, (Icallback) goIupCaretCB);
 }
 
-void goIupSetDblclickFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_DBLCLICK_CB, f);
+void goIupSetDblclickFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_DBLCLICK_CB, f);
 	IupSetCallback(ih, IUP_DBLCLICK_CB, (Icallback) goIupDblclickCB);
 }
 
-void goIupSetEditFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_EDIT_CB, f);
+void goIupSetEditFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_EDIT_CB, f);
 	IupSetCallback(ih, IUP_EDIT_CB, (Icallback) goIupEditCB);
 }
 
-void goIupSetMotionFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_MOTION_CB, f);
+void goIupSetMotionFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_MOTION_CB, f);
 	IupSetCallback(ih, IUP_MOTION_CB, (Icallback) goIupMotionCB);
 }
 
-void goIupSetMultiselectFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_MULTISELECT_CB, f);
+void goIupSetMultiselectFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_MULTISELECT_CB, f);
 	IupSetCallback(ih, IUP_MULTISELECT_CB, (Icallback) goIupMultiselectCB);
 }
 
-void goIupSetValueChangedFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_VALUECHANGED_CB, f);
+void goIupSetValueChangedFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_VALUECHANGED_CB, f);
 	IupSetCallback(ih, IUP_VALUECHANGED_CB, (Icallback) goIupValueChangedCB);
 }
 
-void goIupSetTextActionFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_ACTION, f);
+void goIupSetTextActionFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_ACTION, f);
 	IupSetCallback(ih, IUP_ACTION, (Icallback) goIupTextActionCB);
 }
 
-void goIupSetToggleActionFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_ACTION, f);
+void goIupSetToggleActionFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_ACTION, f);
 	IupSetCallback(ih, IUP_ACTION, (Icallback) goIupToggleActionCB);
 }
 
-void goIupSetTabChangeFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_TABCHANGE_CB, f);
+void goIupSetTabChangeFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_TABCHANGE_CB, f);
 	IupSetCallback(ih, IUP_TABCHANGE_CB, (Icallback) goIupTabChangeCB);
 }
 
-void goIupSetTabChangePosFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_TABCHANGEPOS_CB, f);
+void goIupSetTabChangePosFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_TABCHANGEPOS_CB, f);
 	IupSetCallback(ih, IUP_TABCHANGEPOS_CB, (Icallback) goIupTabChangePosCB);
 }
 
-void goIupSetSpinFunc(Ihandle *ih, void *f) {
-	IupSetCallback(ih, GO_SPIN_CB, f);
+void goIupSetSpinFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_SPIN_CB, f);
 	IupSetCallback(ih, IUP_SPIN_CB, (Icallback) goIupSpinCB);
 }
 
-void goIupSetIdleFunc(void *f) {
-	IupSetFunction(GO_IDLE_ACTION, f);
+void goIupSetShowFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_SHOW_CB, f);
+	IupSetCallback(ih, IUP_SHOW_CB, (Icallback) goIupShowCB);
+}
+
+void goIupSetTrayClickFunc(Ihandle *ih, int f) {
+	IupSetInt(ih, GO_TRAYCLICK_CB, f);
+	IupSetCallback(ih, IUP_TRAYCLICK_CB, (Icallback) goIupTrayClickCB);
+}
+
+void goIupSetIdleFunc() {
 	IupSetFunction(IUP_IDLE_ACTION, (Icallback) goIupIdleCB);
 }

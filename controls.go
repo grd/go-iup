@@ -85,7 +85,6 @@ func Button(title string, opts ...interface{}) *Ihandle {
 		switch v := o.(type) {
 		case ActionFunc:
 			SetActionFunc(ih, v)
-
 		default:
 			Decorate(ih, o)
 		}
