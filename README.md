@@ -72,7 +72,7 @@ Windows, .dll (dynamically linked library) files in your %PATH%.
 Building go-iup
 ---------------
 
-    $ git clone https://github.com/grd/iup.git
+    $ git clone https://github.com/leonrbaker/iup.git
     $ cd go-iup
     $ ./all.bash
 
