@@ -42,6 +42,11 @@ func Dialog(child *Ihandle, opts ...interface{}) *Ihandle {
 
 	for _, o := range opts {
 		switch v := o.(type) {
+		case ShowFunc:
+			SetShowFunc(ih, v)
+		case TrayClickFunc:
+			SetTrayClickFunc(ih, v)
+
 		case string:
 			SetAttributes(ih, v)
 		}

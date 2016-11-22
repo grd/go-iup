@@ -34,6 +34,7 @@
 #define IUP_TABCHANGE_CB    "TABCHANGE_CB"
 #define IUP_TABCHANGEPOS_CB "TABCHANGEPOS_CB"
 #define IUP_SPIN_CB         "SPIN_CB"
+#define IUP_TRAYCLICK_CB    "TRAYCLICK_CB"
 
 #define GO_PREFIX "_GO_"
 
@@ -59,34 +60,38 @@ extern const char *GO_VALUECHANGED_CB;
 extern const char *GO_TABCHANGE_CB;
 extern const char *GO_TABCHANGEPOS_CB;
 extern const char *GO_SPIN_CB;
+extern const char *GO_SHOW_CB;
+extern const char *GO_TRAYCLICK_CB;
 extern const char *GO_IDLE_ACTION;
 
 
-extern void goIupSetMapFunc(Ihandle *ih, void *f);
-extern void goIupSetUnmapFunc(Ihandle *ih, void *f);
-extern void goIupSetDestroyFunc(Ihandle *ih, void *f);
-extern void goIupSetGetFocusFunc(Ihandle *ih, void *f);
-extern void goIupSetKillFocusFunc(Ihandle *ih, void *f);
-extern void goIupSetEnterWindowFunc(Ihandle *ih, void *f);
-extern void goIupSetLeaveWindowFunc(Ihandle *ih, void *f);
-extern void goIupSetKAnyFunc(Ihandle *ih, void *f);
-extern void goIupSetHelpFunc(Ihandle *ih, void *f);
-extern void goIupSetButtonFunc(Ihandle *ih, void *f);
-extern void goIupSetDropFilesFunc(Ihandle *ih, void *f);
-extern void goIupSetActionFunc(Ihandle *ih, void *f);
+extern void goIupSetMapFunc(Ihandle *ih, int f);
+extern void goIupSetUnmapFunc(Ihandle *ih, int f);
+extern void goIupSetDestroyFunc(Ihandle *ih, int f);
+extern void goIupSetGetFocusFunc(Ihandle *ih, int f);
+extern void goIupSetKillFocusFunc(Ihandle *ih, int f);
+extern void goIupSetEnterWindowFunc(Ihandle *ih, int f);
+extern void goIupSetLeaveWindowFunc(Ihandle *ih, int f);
+extern void goIupSetKAnyFunc(Ihandle *ih, int f);
+extern void goIupSetHelpFunc(Ihandle *ih, int f);
+extern void goIupSetButtonFunc(Ihandle *ih, int f);
+extern void goIupSetDropFilesFunc(Ihandle *ih, int f);
+extern void goIupSetActionFunc(Ihandle *ih, int f);
 extern void goSetFunc(Ihandle *ih, char *goName, void *gof, char *cName, void *cf);
-extern void goIupSetListActionFunc(Ihandle *ih, void *f);
-extern void goIupSetCaretFunc(Ihandle *ih, void *f);
-extern void goIupSetDblclickFunc(Ihandle *ih, void *f);
-extern void goIupSetEditFunc(Ihandle *ih, void *f);
-extern void goIupSetMotionFunc(Ihandle *ih, void *f);
-extern void goIupSetMultiselectFunc(Ihandle *ih, void *f);
-extern void goIupSetValueChangedFunc(Ihandle *ih, void *f);
-extern void goIupSetTextActionFunc(Ihandle *ih, void *f);
-extern void goIupSetToggleActionFunc(Ihandle *ih, void *f);
-extern void goIupSetTabChangeFunc(Ihandle *ih, void *f);
-extern void goIupSetTabChangePosFunc(Ihandle *ih, void *f);
-extern void goIupSetSpinFunc(Ihandle *ih, void *f);
-extern void goIupSetIdleFunc(void *f);
+extern void goIupSetListActionFunc(Ihandle *ih, int f);
+extern void goIupSetCaretFunc(Ihandle *ih, int f);
+extern void goIupSetDblclickFunc(Ihandle *ih, int  f);
+extern void goIupSetEditFunc(Ihandle *ih, int f);
+extern void goIupSetMotionFunc(Ihandle *ih, int f);
+extern void goIupSetMultiselectFunc(Ihandle *ih, int f);
+extern void goIupSetValueChangedFunc(Ihandle *ih, int f);
+extern void goIupSetTextActionFunc(Ihandle *ih, int f);
+extern void goIupSetToggleActionFunc(Ihandle *ih, int f);
+extern void goIupSetTabChangeFunc(Ihandle *ih, int f);
+extern void goIupSetTabChangePosFunc(Ihandle *ih, int f);
+extern void goIupSetSpinFunc(Ihandle *ih, int f);
+extern void goIupSetShowFunc(Ihandle *ih, int f);
+extern void goIupSetTrayClickFunc(Ihandle *ih, int f);
+extern void goIupSetIdleFunc();
 #endif
 
